@@ -33,6 +33,7 @@
  */
 
 
+import java.nio.BufferOverflowException;
 import java.util.Arrays;
 
 public class Main {
@@ -48,7 +49,7 @@ public class Main {
         int size = 0;
 
         // initialize the buffer and size variables with some data
-        String temp = "Dr Martin Luther King";
+        String temp = " Dr Martin Luther King ";
         for (int i = 0; i < temp.length(); i++) {
             buffer[i] = temp.charAt(i);
         }
@@ -59,14 +60,48 @@ public class Main {
         System.out.println("size: " + size);
 
         // call your method here
+        size = modifyCStr(buffer, size);
 
         // check the "after" buffer contents via println
-        // check to see if the new buffer's size is correct
+        System.out.println(Arrays.toString(buffer));
 
+        // check to see if the new buffer's size is correct
+        System.out.println("size: " + size);
 
     }
 
     // write your method here
 
+    /**
+     *
+     * @param buf char string
+     * @param size the size of the string
+     * @return the new size of the string
+     */
+    public static int modifyCStr(char[] buf, int size) {
+        for (int i = size; i >= 0; i--) {
+            switch(buf[i]) {
+                case ' ':
+                    // increase string size
+                    size += 2;
+
+                    // do not try if too big
+                    if (size >= BUFFER_CAPACITY) throw new BufferOverflowException();
+
+                    // shift all to right of index right by 2
+                    for (int j = size -1; j >= i + 2 ; j--) {
+                        buf[j] = buf[j-2];
+                    }
+
+                    // set the character to the new values
+                    buf[i] = '%';
+                    buf[i+1] = '2';
+                    buf[i+2] = '0';
+
+                    break;
+            }
+        }
+        return size;
+    }
 
 }
