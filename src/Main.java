@@ -47,7 +47,7 @@ public class Main {
         int size = 0;
 
         // initialize the buffer and size variables with some data
-        String temp = "Do a jig";
+        String temp = "This starts as 38 and ends up with 54.";
         for (int i = 0; i < temp.length(); i++) {
             buffer[i] = temp.charAt(i);
         }
