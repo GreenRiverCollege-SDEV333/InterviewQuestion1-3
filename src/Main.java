@@ -32,7 +32,6 @@
  CareerCup, Palo Alto, CA.
  */
 
-
 import java.util.Arrays;
 
 public class Main {
@@ -48,7 +47,7 @@ public class Main {
         int size = 0;
 
         // initialize the buffer and size variables with some data
-        String temp = "Dr Martin Luther King";
+        String temp = "Do a jig";
         for (int i = 0; i < temp.length(); i++) {
             buffer[i] = temp.charAt(i);
         }
@@ -59,14 +58,26 @@ public class Main {
         System.out.println("size: " + size);
 
         // call your method here
+        size = replaceSpaces(buffer, size);
 
         // check the "after" buffer contents via println
         // check to see if the new buffer's size is correct
-
-
+        System.out.println(Arrays.toString(buffer));
+        System.out.println("size: " + size);
     }
 
-    // write your method here
-
-
+    public static int replaceSpaces(char[] buffer, int size){
+        for(int i = 0; i < size; i++){
+            if(buffer[i]==' '){
+                for(int j=size+3; j>=i ;j--){
+                    buffer[j+2] = buffer[j];
+                }
+                buffer[i]='%';
+                buffer[i+1] = '2';
+                buffer[i+2] = '0';
+                size=size+2;
+            }
+        }
+    return size;
+    }
 }
