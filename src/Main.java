@@ -90,13 +90,19 @@ public class Main {
 
                     // shift all to right of index right by 2
                     for (int j = size -1; j >= i + 2 ; j--) {
+                        // a,_,b,c,\0,\0
+                        // will become
+                        // a,_,b,c,b,c
                         buf[j] = buf[j-2];
                     }
 
                     // set the character to the new values
+                    // array will become
+                    // a,%,2,0,b,c
                     buf[i] = '%';
                     buf[i+1] = '2';
                     buf[i+2] = '0';
+
 
                     break;
             }
