@@ -77,6 +77,7 @@ public class Main {
         }
     }
 
+    // helper method
     private static void shiftOver(char[] buffer, int size, int index) {
         size+=5;
         for (int i = 0; i < 2; i++) {
