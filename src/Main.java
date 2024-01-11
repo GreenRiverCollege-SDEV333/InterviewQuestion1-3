@@ -38,6 +38,23 @@ import java.util.Arrays;
 public class Main {
     public static final int BUFFER_CAPACITY = 32768;
 
+    /**
+     * this function will convert any space characters with '%' '2' '0'
+     */
+    public static int replaceSpaces(char[] buffer, int size) {
+        for (int i = 0; i < size; i++) {
+            if (buffer[i] == ' ') {
+                for (int j = size; j > i; j--) {
+                    buffer[j] = buffer[j - 2];
+                    }
+                buffer[i] = '%';
+                buffer[i + 1] = '2';
+                buffer[i + 2] = '0';
+                size = size + 2;
+            }
+        }
+        return size;
+    }
     public static void main(String[] args) {
         //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
         // to see how IntelliJ IDEA suggests fixing it.
@@ -59,9 +76,11 @@ public class Main {
         System.out.println("size: " + size);
 
         // call your method here
-
+        size = replaceSpaces(buffer, size);
         // check the "after" buffer contents via println
+        System.out.println(Arrays.toString(buffer));
         // check to see if the new buffer's size is correct
+        System.out.println("size: " + size);
 
 
     }
