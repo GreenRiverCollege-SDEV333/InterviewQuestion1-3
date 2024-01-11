@@ -57,7 +57,7 @@ public class Main {
 
         // call your method here
         Main main = new Main();
-        main.replaceSpace(buffer, size);
+        size = main.replaceSpace(buffer, size);
 
         // check the "after" buffer contents via println
         // check to see if the new buffer's size is correct
@@ -68,18 +68,19 @@ public class Main {
     }
 
     // write your method here
-    public void replaceSpace(char[] buffer, int size) {
+    public int replaceSpace(char[] buffer, int size) {
         for (int i = 0; i < size; i++) {
             if (buffer[i] == ' ') {
-                shiftOver(buffer, size, i+1);
+                size = shiftOver(buffer, size, i+1);
 
             }
         }
+        return size;
     }
 
     // helper method
-    private static void shiftOver(char[] buffer, int size, int index) {
-        size+=5;
+    private static int shiftOver(char[] buffer, int size, int index) {
+        size+=2;
         for (int i = 0; i < 2; i++) {
             for (int j = size; j >= index; j--) {
                 buffer[j] = buffer[j-1];
@@ -89,6 +90,7 @@ public class Main {
         buffer[index] = '2';
         buffer[index+1] = '0';
 
+        return size;
     }
 
 }
