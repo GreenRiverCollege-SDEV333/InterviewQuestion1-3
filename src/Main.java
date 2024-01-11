@@ -67,6 +67,10 @@ public class Main {
     }
 
     // write your method here
+    public void add() {
+        for (int i = 0; i < BUFFER_CAPACITY; i++) {
 
+        }
+    }
 
 }
