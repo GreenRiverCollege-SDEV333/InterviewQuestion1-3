@@ -38,7 +38,7 @@ import java.util.Arrays;
 public class Main {
     public static final int BUFFER_CAPACITY = 32768;
 
-    public static void main(String[] args) {
+    public static int main(String[] args) {
         //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
         // to see how IntelliJ IDEA suggests fixing it.
         System.out.println("Hello and welcome!");
@@ -58,15 +58,24 @@ public class Main {
         System.out.println(Arrays.toString(buffer));
         System.out.println("size: " + size);
 
-        // call your method here
-
-        // check the "after" buffer contents via println
-        // check to see if the new buffer's size is correct
-
-
+        // write your method here
+        public static int a ( char[] buffer, int size)int numOfSpaces;
+        {
+            numOfSpaces = 0;
+            for (int i = 0; i < size; i++) {
+                if (buffer[i] == ' ') {
+                    numOfSpaces++;
+                }
+            }
+        }
+        int newSize = size + (2 * numOfSpaces);
+        for (int i = size - 1; i >= 0; i-- );{
+            shiftRight2(i);
+        }
+        return newSize;
     }
 
-    // write your method here
+    public static void shiftRight2(char[] buffer, int startIndex) {
 
-
+    }
 }
