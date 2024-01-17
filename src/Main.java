@@ -59,14 +59,48 @@ public class Main {
         System.out.println("size: " + size);
 
         // call your method here
+        size = replaceSpaces(buffer, size);
 
         // check the "after" buffer contents via println
         // check to see if the new buffer's size is correct
-
+        System.out.println(Arrays.toString(buffer));
+        System.out.println("size: " + size);
 
     }
 
     // write your method here
+    public static int replaceSpaces(char[] buffer, int size) {
+        // loops through buffer array
+        for(int i = 0; i < size; i++) {
+            // checks if char is equal to whitespace
+            if(buffer[i] == ' ') {
+
+                // loops from end of the array up until the whitespace
+                shiftRight(buffer, i, size);
+
+                // adds all the new characters
+                buffer[i] = '%';
+                buffer[i + 1] = '2';
+                buffer[i + 2] = '0';
+
+                // increases size
+                size += 2;
+            }
+        }
+        return size;
+    }
+
+    public static void shiftRight(char[] buffer, int start, int size) {
+        for(int i = size + 2; i > start; i--) {
+            // in case the space is at the index 0 or 1
+            if(start <= 1 && i == (start + 1)) {
+                buffer[i] = '*';
+            } else {
+                buffer[i] = buffer[i - 2];
+            }
+
+        }
+    }
 
 
 }
