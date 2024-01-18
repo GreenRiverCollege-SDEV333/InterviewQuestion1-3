@@ -48,20 +48,34 @@ public class Main {
         int size = 0;
 
         // initialize the buffer and size variables with some data
-        String temp = "Dr Martin Luther King";
+        // String temp = "Dr Martin Luther King";
+
+        //Test cases
+        //Hello, world! size 13, correct new size 15
+        //String temp = "Hello, World!";
+
+        //This is an interview question! size 30 new size 38
+        String temp = "This is an interview question!";
+
+
         for (int i = 0; i < temp.length(); i++) {
             buffer[i] = temp.charAt(i);
         }
         size = temp.length();
-
         // check the "before" buffer and size via println
         System.out.println(Arrays.toString(buffer));
         System.out.println("size: " + size);
 
         // call your method here
-        replaceSpaces(buffer, size);
-        // check the "after" buffer contents via println
+
+
+        // create variable to hold the new size of the buffer.
+        int newSize = replaceSpaces(buffer, size);
         System.out.println(Arrays.toString(buffer));
+
+        // check the "after" buffer contents via println
+        System.out.println("Size: " +  newSize);
+
         // check to see if the new buffer's size is correct
 
 
@@ -71,9 +85,11 @@ public class Main {
     /*
      * This method will count the total of spaces available in the buffer
      * And eventually calculate the maximum of spaces needed for the replacement
-     *
+     * and by using the for loop, the method will be going from the end of the buffer
+     * write
      * */
-    public static void replaceSpaces (char[] buffer, int size){
+    public static int replaceSpaces (char[] buffer, int size) {
+
         int spaceCount = 0;
         int newLength;
         int i;
@@ -81,12 +97,35 @@ public class Main {
         create a for loop to count the number of spaces
         use size for the comparison
         */
-        for ( i = 0; i < size; i++) {
-            if(buffer[i] == ' '){
+        for (i = 0; i < size; i++) {
+            if (buffer[i] == ' ') {
                 spaceCount++;
             }
         }
+        /* calculate new string size
+        because we need 2 extra space for '2' and '0'
+        '%' will take over the available ' ' we will * the space count with 2
+         */
+        newLength = size + spaceCount * 2;
 
-
+        /*
+         * This for loop will find the spaces
+         * and filling in the character '0' '2' '%'
+         * once the character is fill in*/
+        for (i = size - 1; i >= 0; i--) {// when a space is found, the for loop will
+            if (buffer[i] == ' ') {
+                buffer[newLength - 1] = '0';
+                buffer[newLength - 2] = '2';
+                buffer[newLength - 3] = '%';
+                newLength = newLength - 3; //we need this statement because the newLength is of the buffer is reduced by 3
+            } else {// if space is not found, the current character will be moved to the new spot of the buffer
+                buffer[newLength - 1] = buffer[i];
+                newLength = newLength - 1;
+            }
         }
+        //Return the new size of the buffer
+        newLength = size + spaceCount * 2;
+        return newLength;
+    }
+
 }
