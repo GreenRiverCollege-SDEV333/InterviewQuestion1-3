@@ -59,14 +59,34 @@ public class Main {
         System.out.println("size: " + size);
 
         // call your method here
-
+        replaceSpaces(buffer, size);
         // check the "after" buffer contents via println
+        System.out.println(Arrays.toString(buffer));
         // check to see if the new buffer's size is correct
 
 
     }
 
     // write your method here
+    /*
+     * This method will count the total of spaces available in the buffer
+     * And eventually calculate the maximum of spaces needed for the replacement
+     *
+     * */
+    public static void replaceSpaces (char[] buffer, int size){
+        int spaceCount = 0;
+        int newLength;
+        int i;
+        /*
+        create a for loop to count the number of spaces
+        use size for the comparison
+        */
+        for ( i = 0; i < size; i++) {
+            if(buffer[i] == ' '){
+                spaceCount++;
+            }
+        }
 
 
+        }
 }
