@@ -59,14 +59,29 @@ public class Main {
         System.out.println("size: " + size);
 
         // call your method here
-
+        URLify(buffer, size);
         // check the "after" buffer contents via println
         // check to see if the new buffer's size is correct
-
 
     }
 
     // write your method here
-
-
+    public static void URLify(char[] buffer, int size)
+    {
+        for (int i = 0; i < size; i++) {
+            if(buffer[i] == ' ')
+            {
+                buffer[i] = '%';
+                for (int j = size+1; j > i+2; j--) {
+                    buffer[j] = buffer[j-2];
+                }
+                buffer[i+1] = '2';
+                buffer[i+2] = '0';
+                size+=2;
+            }
+        }
+        System.out.println("Updated Array:");
+        System.out.println(Arrays.toString(buffer));
+        System.out.println("size: " + size);
+    }
 }
