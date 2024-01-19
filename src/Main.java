@@ -39,10 +39,6 @@ public class Main {
     public static final int BUFFER_CAPACITY = 32768;
 
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.println("Hello and welcome!");
-
         // set up empty buffer, size of 0
         char[] buffer = new char[BUFFER_CAPACITY];
         int size = 0;
@@ -55,18 +51,46 @@ public class Main {
         size = temp.length();
 
         // check the "before" buffer and size via println
+        System.out.println("Before");
         System.out.println(Arrays.toString(buffer));
-        System.out.println("size: " + size);
+        System.out.println("size: " + size + "\n");
 
         // call your method here
+        Main main = new Main();
+        size = main.replaceSpace(buffer, size);
 
         // check the "after" buffer contents via println
         // check to see if the new buffer's size is correct
-
+        System.out.println("After");
+        System.out.println(Arrays.toString(buffer));
+        System.out.println("size: " + size);
 
     }
 
     // write your method here
+    public int replaceSpace(char[] buffer, int size) {
+        for (int i = 0; i < size; i++) {
+            if (buffer[i] == ' ') {
+                size = shiftOver(buffer, size, i+1);
 
+            }
+        }
+        return size;
+    }
+
+    // helper method
+    private static int shiftOver(char[] buffer, int size, int index) {
+        size+=2;
+        for (int i = 0; i < 2; i++) {
+            for (int j = size; j >= index; j--) {
+                buffer[j] = buffer[j-1];
+            }
+        }
+        buffer[index-1] = '%';
+        buffer[index] = '2';
+        buffer[index+1] = '0';
+
+        return size;
+    }
 
 }
