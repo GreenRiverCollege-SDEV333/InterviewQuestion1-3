@@ -59,18 +59,41 @@ public class Main {
         System.out.println("size: " + size);
 
         // call your method here
-
+        space(buffer, size);
         // check the "after" buffer contents via println
         // check to see if the new buffer's size is correct
-
+        System.out.println(Arrays.toString(buffer));
 
     }
+    public static void space(char[] buffer, int size) {
+        int spaceCount = 0;
 
-    // write your method here
-    public void add() {
-        for (int i = 0; i < BUFFER_CAPACITY; i++) {
+        // Count the number of spaces in the buffer
+        for (int i = 0; i < size; i++) {
+            if (buffer[i] == ' ') {
+                spaceCount++;
+            }
+        }
 
+        int newIndex = size + spaceCount * 2 - 1;
+
+        if (newIndex + 1 < buffer.length) {
+            buffer[newIndex + 1] = '\0';
+        }
+
+        // Replace spaces with "%20"
+        for (int i = size - 1; i >= 0; i--) {
+            if (buffer[i] == ' ') {
+                buffer[newIndex] = '0';
+                buffer[newIndex - 1] = '2';
+                buffer[newIndex - 2] = '%';
+                newIndex -= 3;
+            } else {
+                buffer[newIndex] = buffer[i];
+                newIndex--;
+            }
         }
     }
+
 
 }
