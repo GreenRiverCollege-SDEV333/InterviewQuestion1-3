@@ -44,7 +44,7 @@ public class Main {
     public static int replaceSpaces(char[] buffer, int size) {
         for (int i = 0; i < size; i++) {
             if (buffer[i] == ' ') {
-                for (int j = size; j > i; j--) {
+                for (int j = size + 1; j > i; j--) {
                     buffer[j] = buffer[j - 2];
                     }
                 buffer[i] = '%';
