@@ -59,6 +59,9 @@ public class Main {
         System.out.println("size: " + size);
 
         // call your method here
+        buffer = adjustedBuffer(buffer, size);
+        System.out.println(Arrays.toString(buffer));
+        System.out.println("size: " + adjustSize(size));
 
         // check the "after" buffer contents via println
         // check to see if the new buffer's size is correct
@@ -67,6 +70,33 @@ public class Main {
     }
 
     // write your method here
+    public static char[] adjustedBuffer(char[] buffer, int size)
+    {
+        //run through the buffer. if the arrayList contains
+        for (int i = 0; i < buffer.length; i++)
+        {
+            if (buffer[i] == ' ')
+            {
+                //start at the end of the array
+                for (int j = size - 1; j >= i ; j--)
+                {
+                    //shift everything over by 2, assigning the current
+                    buffer[j + 2] = buffer[j];
+                }
+                adjustSize(size);
+                buffer[i] = '%';
+                buffer[i + 1] = '2';
+                buffer[i + 2] = '0';
+            }
+        }
+        return buffer;
+    }
 
+    public static int adjustSize(int size)
+    {
+        size += 2;
+
+        return size;
+    }
 
 }
