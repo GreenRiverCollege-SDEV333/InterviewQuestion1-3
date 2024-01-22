@@ -58,66 +58,45 @@ public class Main {
         System.out.println(Arrays.toString(buffer));
         System.out.println("size: " + size);
 
-
-
         // call your method here
-
+       urlify(buffer, size);
         // check the "after" buffer contents via println
-        System.out.println();
+        System.out.println(Arrays.toString(buffer));
         // check to see if the new buffer's size is correct
-        System.out.println(addMoreSpace(size,buffer));
-    }
-
-    // write your method here
-    public static char[] addSpaces(String str, char[] buffer){
-        int size = 0;
-        for (int i = 0; i < str.length(); i++) {
-            char cur = str.charAt(i);
-            if (cur != ' '){
-                buffer[size] = cur;
+        size=0;
+        for (int i = 0; i < buffer.length; i++) {
+            //not equals to null
+            if (buffer[i] != '\u0000'){
                 size++;
             }
-            else {
-                buffer[size] = '%';
-                buffer[size+1] = '2';
-                buffer[size+2] = '0';
-                size+=3;
-            }
         }
-        return buffer;
+        System.out.println("Size: " + size);
     }
 
-    public static char[] addMoreSpace(int size, char[] buffer){
-        for (int i = size; i > 0; i--) {
-            char currChar = buffer[i];
-            if(currChar == ' '){
-                for (int j = i; j < size; j++) {
-                    char curr = buffer[j];
-                    if (curr != ' '){
-                        buffer[j] = buffer[j+2];
-                    }
-                    else {
-                        buffer[j] = '%';
-                        buffer[j+1] = '2';
-                        buffer[j+2] = '0';
-                        size+=3;
-                    }
-                }
+
+    // write your method here
+    public static char[] urlify(char[] buffer, int size){
+        int spaceSize = 0;
+        for (int i = 0; i < size; i++) {
+            if (buffer[i] == ' ') {
+                spaceSize++;
             }
         }
-        return buffer;
-    }
 
-    public static char[] shiftRight (int size, int blankStart, char[]buffer){
-        for (int i = size; i <= blankStart; i--) {
-            char curr = buffer[i];
-            if (curr != ' '){
-                buffer[i] = buffer[i += 2];
-            }
-            else{
-                buffer[i] = '%';
-                buffer[i+1] = '2';
-                buffer[i+2] = '0';
+        // Calculate the size after adding in %20 in blank spaces
+        int maxSizePointer = size + spaceSize * 2;
+        System.out.println("Buffer Size: " + maxSizePointer);
+        for (int i = size - 1; i >= 0; i--) {
+            if (buffer[i] == ' ') {
+                //if there is a blank space, replace with %20 relative to the maxSizePointer at the back
+                buffer[maxSizePointer - 1] = '0';
+                buffer[maxSizePointer - 2] = '2';
+                buffer[maxSizePointer - 3] = '%';
+                maxSizePointer -= 3;
+            } else {
+                //if letter, place within their location relative to maxSizePointer at the back
+                buffer[maxSizePointer - 1] = buffer[i];
+                maxSizePointer--;
             }
         }
         return buffer;
