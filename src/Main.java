@@ -57,16 +57,39 @@ public class Main {
         // check the "before" buffer and size via println
         System.out.println(Arrays.toString(buffer));
         System.out.println("size: " + size);
-
         // call your method here
-
+        counter(buffer, size);
         // check the "after" buffer contents via println
+        System.out.println(Arrays.toString(buffer));
         // check to see if the new buffer's size is correct
-
+        System.out.println("size: " + size);
 
     }
 
-    // write your method here
+    public static void counter(char[] buffer, int size) { //changed from int to void to avoid return statement
+        int spaceNumbers = 0;
+        for (int j = 0; j < size; j++) {
+            if (buffer[j] == ' ') {
+                spaceNumbers++;
+                // Start by counting the spaces in the array
+            } //fixed an issue where using an int as a variable required a return statement.
+            // it creates confusion and is easiest set as void
+        }
 
-
+        int newArray = size + (spaceNumbers * 2); //double each space to create space for the %20
+        //This for loop goes through each white space and inserts a % then 2 then 0.
+        // note the array SIZE doubles so that the new buffer has enough space
+        //This is different that the length of the array in which there seams to be plenty of room.
+        for (int i = size - 1; i >= 0; i--) {
+            if (buffer[i] == ' ') {
+                buffer[newArray - 1] = '0';
+                buffer[newArray - 2] = '2';
+                buffer[newArray - 3] = '%';
+                newArray = newArray - 3;
+            } else {
+                buffer[newArray - 1] = buffer[i]; //copy the original buffer to the new array
+                newArray--;
+            }
+        }
+    }
 }
