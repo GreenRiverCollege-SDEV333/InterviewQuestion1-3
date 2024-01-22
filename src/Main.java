@@ -59,14 +59,49 @@ public class Main {
         System.out.println("size: " + size);
 
         // call your method here
+        replaceSpaces(buffer, size);
 
         // check the "after" buffer contents via println
         // check to see if the new buffer's size is correct
-
+        System.out.println(Arrays.toString(buffer));
+        
+        int spots = 0;
+        for (int i = 0; i < buffer.length; i++) {
+            if (buffer[i] != '\0') {
+                spots++;
+            }
+        }
+        size = spots;
+        
+        System.out.println("size: " + size);
 
     }
 
     // write your method here
+    public static void replaceSpaces(char[] buffer, int trueSize) {
+        int spaceCount = 0;
 
+        for (int i = 0; i < trueSize; i++) {
+            if (buffer[i] == ' ') {
+                spaceCount++;
+            }
+        }
+
+        int newSize = trueSize + (2 * spaceCount);
+
+        for (int i = trueSize - 1; i >= 0; i--) {
+            if (buffer[i] == ' ') {
+                buffer[newSize - 1] = '0';
+                buffer[newSize - 2] = '2';
+                buffer[newSize - 3] = '%';
+                newSize -= 3;
+            } else {
+                buffer[newSize - 1] = buffer[i];
+                newSize -= 1;
+            }
+
+        }
+
+    }
 
 }
