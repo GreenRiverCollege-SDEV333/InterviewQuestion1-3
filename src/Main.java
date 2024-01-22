@@ -34,32 +34,28 @@
 
 
 import java.util.Arrays;
-
 public class Main {
     public static final int BUFFER_CAPACITY = 32768;
-
     public static void main(String[] args) {
         //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
         // to see how IntelliJ IDEA suggests fixing it.
         System.out.println("Hello and welcome!");
-
         // set up empty buffer, size of 0
         char[] buffer = new char[BUFFER_CAPACITY];
         int size = 0;
-
         // initialize the buffer and size variables with some data
         String temp = "Dr Martin Luther King";
         for (int i = 0; i < temp.length(); i++) {
             buffer[i] = temp.charAt(i);
         }
         size = temp.length();
-
         // check the "before" buffer and size via println
         System.out.println(Arrays.toString(buffer));
         System.out.println("size: " + size);
 
         // call your method here
 
+        urlify(buffer, size);
         // check the "after" buffer contents via println
         // check to see if the new buffer's size is correct
 
@@ -69,4 +65,25 @@ public class Main {
     // write your method here
 
 
+    public static void urlify(char[] buffer, int size)
+    {
+        for (int i = 0; i < size; i++)
+        {
+            //if there is a space
+            if(buffer[i] == ' ')
+            {
+                buffer[i] = '%';
+                for (int j = size + 1; j > i + 2; j--)
+                {
+                    buffer[j] = buffer[j-2];
+                }
+                buffer[i + 1] = '2';
+                buffer[i + 2] = '0';
+                size += 2;
+            }
+        }
+        System.out.println("Updated Array:");
+        System.out.println(Arrays.toString(buffer));
+        System.out.println("size: " + size);
+    }
 }
