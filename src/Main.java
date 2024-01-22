@@ -35,9 +35,19 @@
 
 import java.util.Arrays;
 
+/**
+ * The main class to run the main method
+ * @author Huy Nguyen
+ * @version 1.0
+ */
+
 public class Main {
     public static final int BUFFER_CAPACITY = 32768;
 
+    /**
+     * The main method of java
+     * @param args string arguments of main method
+     */
     public static void main(String[] args) {
         //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
         // to see how IntelliJ IDEA suggests fixing it.
@@ -75,6 +85,14 @@ public class Main {
 
 
     // write your method here
+
+    /**
+     * The urlify method to add '%20' at every space and increment the size
+     *
+     * @param buffer the char[] which is being manipulated
+     * @param size current size of the buffer
+     * @return
+     */
     public static char[] urlify(char[] buffer, int size){
         int spaceSize = 0;
         for (int i = 0; i < size; i++) {
