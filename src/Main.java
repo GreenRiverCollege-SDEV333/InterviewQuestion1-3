@@ -59,14 +59,57 @@ public class Main {
         System.out.println("size: " + size);
 
         // call your method here
+        int newSize = urlify(buffer, size);
 
         // check the "after" buffer contents via println
+        System.out.println(Arrays.toString(buffer));
         // check to see if the new buffer's size is correct
-
-
+        System.out.println("size: " + newSize);
     }
 
     // write your method here
+    private static int urlify(char[] buffer, int size)
+    {
+        //keep track of whitespaces
+        int spaces = 0;
 
+        //count spaces in buffer char array
+        for(char character:buffer)
+        {
+            if(character == ' ')
+            {
+                spaces++;
+            }
+        }
 
+        //new size of string when replacing spaces with %20
+        //multiply spaces by 2 to get two additional indices ' ' -> '%20'
+        int newSize = size + (spaces * 2);
+        int returnSize = newSize;
+
+        //iterate through the array backwards and insert '%20' at the current newSize index
+        //use newSize to account for the change in array sizes, it will equal out once there are no more '%20' to add
+        for(int i = size - 1; i > 1; i--)
+        {
+            if(buffer[i] == ' ')
+            {
+                //%20 is written backwards because we are traversing backwards
+                buffer[newSize - 1] = '0';
+                buffer[newSize - 2] = '2';
+                buffer[newSize - 3] = '%';
+                //decrease newSize by 3 because we added 3 chars to the array
+                newSize -= 3;
+            }
+            else
+            {
+                //since we didn't find whitespace, substitute the current index with buffer[i]
+                buffer[newSize - 1] = buffer[i];
+                //decrement newSize
+                newSize--;
+            }
+        }
+
+        //return size of new array
+        return returnSize;
+    }
 }
