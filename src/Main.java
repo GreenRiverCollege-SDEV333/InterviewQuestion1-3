@@ -69,5 +69,26 @@ public class Main {
 
     // write your method here
 
+    /**
+     * Calculates the number of spaces in the given buffer, and returns the size that would be necessary to urlify it
+     * @param buffer the buffer being searched
+     * @param size the current size of the given buffer
+     * @return the newly calculated size
+     */
+    private static int calculateNewSize(char[] buffer, int size) {
+        // setup tracker for new size
+        int newSize = size;
 
+        // run through the given buffer
+        for(char currChar : buffer) {
+            // if the current character is a space
+            if(currChar == ' ') {
+                // increase new size by two as we are adding three chars,
+                // one of which replaces the spot taken up by space character
+                newSize += 2;
+            }
+        }
+
+        return newSize;
+    }
 }
