@@ -37,7 +37,7 @@ public class Main {
     /**
      * The maximum capacity of the current buffer
      */
-    public static final int BUFFER_CAPACITY = 50; //32768;
+    public static final int BUFFER_CAPACITY = 100; //32768;
 
     public static void main(String[] args) {
         // set up empty buffer
@@ -68,14 +68,16 @@ public class Main {
             // if the current character is a space
             if(buffer[i] == ' ') {
                 // run through buffer backwards, up till index where space was found
-                for(int j = size + 3; j >= i; j--) {
-                    // get value at previous index and place in current index
-                    buffer[j] = buffer[j - 1];
+                for(int j = size + 5; j >= i; j--) {
+                    // get value from two indexes back and place in current index,
+                    // thus creating two vacant spots next to the space
+                    buffer[j] = buffer[j - 2];
                 }
 
-                // set space replacement values: '%' '2' '0'
+                // set replacement values in the now three vacant slots: '%' '2' '0'
                 buffer[i] = '%';
                 buffer[i + 1] = '2';
+                buffer[i + 2] = '0';
             }
         }
 
