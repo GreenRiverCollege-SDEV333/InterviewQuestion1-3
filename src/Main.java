@@ -59,8 +59,19 @@ public class Main {
         System.out.println();
 
         // call your method here
+        size = urlify(buffer, size);
 
-        // update size
+        // check the "after" buffer contents via println
+        // check to see if the new buffer's size is correct
+        System.out.println("After");
+        System.out.println(Arrays.toString(buffer));
+        System.out.println("size: " + size);
+    }
+
+    // write your method here
+
+    private static int urlify(char[] buffer, int size) {
+        // calculate new size prior to modification
         int newSize = calculateNewSize(buffer, size);
 
         // run through given buffer backwards
@@ -81,14 +92,9 @@ public class Main {
             }
         }
 
-        // check the "after" buffer contents via println
-        // check to see if the new buffer's size is correct
-        System.out.println("After");
-        System.out.println(Arrays.toString(buffer));
-        System.out.println("size: " + newSize);
+        // return updated size
+        return newSize;
     }
-
-    // write your method here
 
     /**
      * Calculates the number of spaces in the given buffer, and returns the size that would be necessary to urlify it
