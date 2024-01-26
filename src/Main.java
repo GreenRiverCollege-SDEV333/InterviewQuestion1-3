@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 /*
  URLify: Write a method to replace all spaces (" ") in
  a character buffer (array) with "%20". You may assume
@@ -31,42 +33,69 @@
  Gayle Laakmann McDowell. 2016. Cracking the Coding Interview (6th ed.)
  CareerCup, Palo Alto, CA.
  */
-
-
-import java.util.Arrays;
-
 public class Main {
-    public static final int BUFFER_CAPACITY = 32768;
+    /**
+     * The maximum capacity of the current buffer
+     */
+    public static final int BUFFER_CAPACITY = 100; //32768;
 
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.println("Hello and welcome!");
-
-        // set up empty buffer, size of 0
+        // set up empty buffer
         char[] buffer = new char[BUFFER_CAPACITY];
-        int size = 0;
 
-        // initialize the buffer and size variables with some data
+        // add some data to buffer
         String temp = "Dr Martin Luther King";
         for (int i = 0; i < temp.length(); i++) {
             buffer[i] = temp.charAt(i);
         }
-        size = temp.length();
+
+        // track buffer length
+        int size = temp.length();
 
         // check the "before" buffer and size via println
+        System.out.println("Before");
         System.out.println(Arrays.toString(buffer));
         System.out.println("size: " + size);
+        System.out.println();
 
         // call your method here
+        size = urlify(buffer, size);
 
         // check the "after" buffer contents via println
         // check to see if the new buffer's size is correct
-
-
+        System.out.println("After");
+        System.out.println(Arrays.toString(buffer));
+        System.out.println("size: " + size);
     }
 
     // write your method here
 
+    private static int urlify(char[] buffer, int size) {
+        // calculate new size prior to modification
+        int newSize = size;
 
+        // run through given buffer backwards
+        for (int i = size; i > 0; i--) {
+            // if the current character is a space
+            if(buffer[i] == ' ') {
+                // run through buffer backwards, up till index where space was found
+                for(int j = size + 5; j >= i; j--) {
+                    // get value from two indexes back and place in current index,
+                    // thus creating two vacant spots next to the space
+                    buffer[j] = buffer[j - 2];
+                }
+
+                // set replacement values in the now three vacant slots: '%' '2' '0'
+                buffer[i] = '%';
+                buffer[i + 1] = '2';
+                buffer[i + 2] = '0';
+
+                // update size counter as two more values are now tracked
+                newSize += 2;
+            }
+        }
+
+        // return updated size
+        return newSize;
+    }
 }
