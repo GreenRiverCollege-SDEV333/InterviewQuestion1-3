@@ -60,11 +60,30 @@ public class Main {
 
         // call your method here
 
+        // update size
+        int newSize = calculateNewSize(buffer, size);
+
+        // run through given buffer backwards
+        for (int i = size; i > 0; i--) {
+            // if the current character is a space
+            if(buffer[i] == ' ') {
+                // run through buffer backwards, up till index where space was found
+                for(int j = size + 3; j >= i; j--) {
+                    // get value at previous index and place in current index
+                    buffer[j] = buffer[j - 1];
+                }
+
+                // set space replacement values: '%' '2' '0'
+                buffer[i] = '%';
+                buffer[i + 1] = '2';
+            }
+        }
+
         // check the "after" buffer contents via println
         // check to see if the new buffer's size is correct
         System.out.println("After");
         System.out.println(Arrays.toString(buffer));
-        System.out.println("size: " + size);
+        System.out.println("size: " + newSize);
     }
 
     // write your method here
