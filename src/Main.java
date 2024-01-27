@@ -59,14 +59,48 @@ public class Main {
         System.out.println("size: " + size);
 
         // call your method here
+        int newSize = URLify(buffer, size);
 
         // check the "after" buffer contents via println
         // check to see if the new buffer's size is correct
-
-
+        System.out.println(Arrays.toString(buffer));
+        System.out.println("size: " + newSize);
     }
 
     // write your method here
+    /*
+        If a space is found in the buffer:
+        -Increase the buffer size by 2
+        -Scoot everything in an index higher than the index of the space up by 2 indexes
+        -Replace the space with a %
+        -Fill the two empty indexes above % with a 2 and a 0 respectively
+     */
+    public static int URLify(char[] buffer, int size)
+    {
+        //check buffer for spaces
+        for (int i = 0; i < size; i++)
+        {
+            if (buffer[i] == ' ')
+            {
+                //store the index of the space
+                int spaceIndex = i;
 
+                //increment the size variable by 2
+                size = size + 2;
+
+                //scoot the other stuff
+                for (int j = size; j >= spaceIndex + 2; j--)
+                {
+                    buffer[j] = buffer[j - 2];
+                }
+
+                //replacing the empty spaces with new characters
+                buffer[spaceIndex] = '%';
+                buffer[spaceIndex + 1] = '2';
+                buffer[spaceIndex + 2] = '0';
+            }
+        }
+        return size;
+    }
 
 }
