@@ -59,14 +59,53 @@ public class Main {
         System.out.println("size: " + size);
 
         // call your method here
-
+        solution(buffer, temp.length());
         // check the "after" buffer contents via println
         // check to see if the new buffer's size is correct
 
-
+        System.out.println(Arrays.toString(buffer));
+        size = 0;
+        while (buffer[size] != 0) {
+            size++;
+        }
+        System.out.println("size: " + size);
     }
 
-    // write your method here
 
+
+    // Go from the end of the array and find white space
+    // When get to white space move everything to the right of the white space 2 spaces to the right
+    // size + 2
+    // insert % in original white space
+    // insert 2 after the percent sign
+    // insert 0 to the right of the 2
+    // continue through array to find another white space
+
+
+
+
+
+
+    public static void solution(char[] buffer, int size) {
+        char percent = '%';
+        char two = '2';
+        char zero = '0';
+        for (int i = 0; i < size; i++) {
+            if (buffer[i] == ' ') {
+                moveToTheRight(buffer, i, size);
+                buffer[i] = percent;
+                buffer[i+1] = two;
+                buffer[i+2] = zero;
+                size = size + 2;
+            }
+        }
+    }
+
+    public static void moveToTheRight(char[] buffer, int position, int size) {
+        // move everything over 2, starting from the rightmost spot
+        for (int i = size - 1; i > position; i--) {
+            buffer[i+2] = buffer[i];
+        }
+    }
 
 }
