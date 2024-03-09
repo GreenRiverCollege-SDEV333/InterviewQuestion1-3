@@ -38,7 +38,7 @@ import java.util.Arrays;
 public class Main {
     public static final int BUFFER_CAPACITY = 32768;
 
-    public static int main(String[] args) {
+    public static void main(String[] args) {
         //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
         // to see how IntelliJ IDEA suggests fixing it.
         System.out.println("Hello and welcome!");
@@ -54,28 +54,57 @@ public class Main {
         }
         size = temp.length();
 
+
         // check the "before" buffer and size via println
         System.out.println(Arrays.toString(buffer));
         System.out.println("size: " + size);
 
-        // write your method here
-        public static int a ( char[] buffer, int size)int numOfSpaces;
-        {
-            numOfSpaces = 0;
-            for (int i = 0; i < size; i++) {
-                if (buffer[i] == ' ') {
-                    numOfSpaces++;
-                }
+        // call your method here
+        System.out.println("before:");
+        shiftRight2(buffer, size);
+        int newSize = replaceSpace(buffer, size);
+        // check the "after" buffer contents via println
+        // check to see if the new buffer's size is correct
+
+        System.out.println("after:");
+        shiftRight2(buffer, newSize);
+    }
+
+    // write your method here
+    public static int replaceSpace(char[]buffer, int size){
+        int numOfSpace =0;
+        //count number of space
+        for(int i =0; i<size; i++){
+            if(buffer[i]== ' '){
+                numOfSpace++;
             }
         }
-        int newSize = size + (2 * numOfSpaces);
-        for (int i = size - 1; i >= 0; i-- );{
-            shiftRight2(i);
+        //new size replaced with %20
+        int newSize =size+(2*numOfSpace);
+
+        for(int i = size-1; i>=0; i--){
+            if (buffer[i]==' '){
+                buffer[i+2*numOfSpace]='0';
+                buffer[i+2*numOfSpace-1]='2';
+                buffer[i+2*numOfSpace-2]='%';
+                numOfSpace--;
+            }else{
+                buffer[i+2*numOfSpace]=buffer[i];
+            }
+
         }
         return newSize;
     }
 
-    public static void shiftRight2(char[] buffer, int startIndex) {
+    //print buffer and size
+    public static void shiftRight2(char[]buffer, int size){
+        StringBuilder output = new StringBuilder();
+        for(int i =0; i<size;i++){
+            output.append(buffer[i]);
 
+        }
+        //display the buffer and size
+        System.out.println("output:"+output);
+        System.out.println("size:"+size);
     }
 }
