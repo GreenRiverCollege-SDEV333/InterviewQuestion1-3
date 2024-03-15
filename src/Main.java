@@ -59,14 +59,43 @@ public class Main {
         System.out.println("size: " + size);
 
         // call your method here
-
+        int updateSize = moveSpaces(buffer, size);
         // check the "after" buffer contents via println
         // check to see if the new buffer's size is correct
+        System.out.println(Arrays.toString(buffer));
+        System.out.println("size: " + updateSize);
 
 
     }
 
     // write your method here
+//    this method will return an int that contains a number of space will be need to be move inside the buffer with the length of the size.
+    public static int moveSpaces(char[] buffer, int size ) {
+        int spaceCount = findSpacesToMove(buffer,size);
+        int newSize = ( spaceCount * 2 )  + size; // size is currently 27
+        int movedIndex = newSize - 1;
+        for (int current = size - 1; current >= 0 ; current--) {
+//          if there is a white space is found
+            if(Character.isWhitespace(buffer[current])){
+                buffer[movedIndex--] = '0';
+                buffer[movedIndex--] = '2';
+                buffer[movedIndex--] = '%';
 
+            }else { // if there are no white spaces
+                buffer[movedIndex--] = buffer[current];
+            }
+        }
+        return newSize;
+    }
 
+    public static int findSpacesToMove(char[] buffer, int size ) {
+        int spaceCount = 0;
+        for (int i = 0; i < size - 1; i++) {
+            if(Character.isWhitespace(buffer[i]))
+            {
+                spaceCount++;
+            }
+        }
+        return spaceCount;
+    }
 }
