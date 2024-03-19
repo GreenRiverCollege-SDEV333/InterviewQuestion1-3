@@ -41,32 +41,82 @@ public class Main {
     public static void main(String[] args) {
         //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
         // to see how IntelliJ IDEA suggests fixing it.
-        System.out.println("Hello and welcome!");
+
 
         // set up empty buffer, size of 0
         char[] buffer = new char[BUFFER_CAPACITY];
-        int size = 0;
+        int size;
+
+        System.out.println("Hello and welcome!");
+        // initialize the buffer and size variables with some data
+        String temp1 = "Hello and welcome!";
+        for (int i = 0; i < temp1.length(); i++) {
+            buffer[i] = temp1.charAt(i);
+        }
+        size = temp1.length();
+
+        whiteSpaceReplacer(size, buffer);
+        // check the "after" buffer contents via println
+        // check to see if the new buffer's size is correct
+        System.out.println(buffer);
+
 
         // initialize the buffer and size variables with some data
-        String temp = "Dr Martin Luther King";
-        for (int i = 0; i < temp.length(); i++) {
-            buffer[i] = temp.charAt(i);
+        System.out.println("Dr Martin Luther King");
+        String temp2 = "Dr Martin Luther King";
+        for (int i = 0; i < temp2.length(); i++) {
+            buffer[i] = temp2.charAt(i);
         }
-        size = temp.length();
+        size = temp2.length();
 
         // check the "before" buffer and size via println
         System.out.println(Arrays.toString(buffer));
         System.out.println("size: " + size);
 
         // call your method here
-
+        whiteSpaceReplacer(size, buffer);
         // check the "after" buffer contents via println
         // check to see if the new buffer's size is correct
+        System.out.println(buffer);
 
+        //Above should be pushed into a method. but the files didn't establish them that way.
 
     }
 
     // write your method here
+    private static void whiteSpaceReplacer(int size, char[] buffer){
+        int countSpace = 0;
+        for(int i = 0; i<size; i++){
+            if(buffer[i]==' '){
+                countSpace += 2;
+            }
+        }
+
+
+        //size = 15
+        // 3 white space = 6 more to size
+        //21
+//        int newSize = size + countSpace;
+        int newPosition = size + countSpace;
+        //By knowing the new Size, start moving letters to the new spots until you reach a white space.
+        for (int i = size; i >= 0; i--){
+            //if buffer position is a white space add % to newPosition, 2 to newPosition -1, % to new position -3
+            //Move the new position by 3 points INSTEAD of 1.
+            if(buffer[i] ==  ' '){
+                buffer[newPosition] = '0';
+                buffer[newPosition-1] = '2';
+                buffer[newPosition-2] = '%';
+                //move new position by 3 positions.
+                newPosition -= 3;
+            }
+            else if (newPosition != 0){
+                //move characters from old index positions to new index positions.
+                buffer[newPosition] = buffer[i];
+                //shift new position by 1 value to fill in the next box
+                newPosition--;
+            }
+        }
+    }
 
 
 }
